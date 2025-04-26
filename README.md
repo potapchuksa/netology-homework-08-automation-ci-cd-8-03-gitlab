@@ -1,0 +1,1 @@
+# netology-homework-08-automation-ci-cd-8-03-gitlab
