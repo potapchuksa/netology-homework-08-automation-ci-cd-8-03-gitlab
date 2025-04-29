@@ -1,0 +1,18 @@
+stages:
+  - test-and-build
+
+test:
+  stage: test-and-build
+  image: golang:1.17
+  script: 
+    - go test .
+  tags:
+    - docker
+
+build:
+  stage: test-and-build
+  image: docker:latest
+  script:
+    - docker build .
+  tags:
+    - docker
