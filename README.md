@@ -89,7 +89,7 @@
 
 ![](img/img-01-17.png)
 
-12. Команда регистрации раннера большая, поэтому поместил ее в [скрипт](scripts-for-registration-and-run-runners/registration.sh)
+12. Команда регистрации раннера большая, поэтому поместил ее в [скрипт](scripts-for-creating-and-run-runners/registration.sh)
 
 ![](img/img-01-18.png)
 
@@ -107,7 +107,7 @@
 
 ![](img/img-01-22.png)
 
-15. Сделал [скрипт](scripts-for-registration-and-run-runners/registration.sh) для запуска раннера
+15. Сделал [скрипт](scripts-for-creating-and-run-runners/registration.sh) для запуска раннера
 
 ![](img/img-01-23.png)
 
@@ -143,7 +143,7 @@
 
 ![](img/img-02-02.png)
 
-2. Создал файл [.gitlab-ci.yml](.gitlab-ci.yml.v1) с двумя этапами (тестирование и сборка)
+2. Создал файл [.gitlab-ci.yml](pipline-configurations/.gitlab-ci.yml.v1) с двумя этапами (тестирование и сборка)
 
 ![](img/img-02-03.png)
 
@@ -207,10 +207,12 @@
 
 
 * для того, чтобы задача запускалась только при изменении файлов с расширением *.go надо использовать в задаче конструкцию:
+
+```
   rules:
     - changes:
         - "**/*.go"
-
+```
  
 1. Снова изменил конфигурацию [пайплайна](pipline-configurations/.gitlab-ci.yml.v3)
 

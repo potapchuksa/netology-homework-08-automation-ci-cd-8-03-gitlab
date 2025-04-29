@@ -82,3 +82,7 @@ echo "   sudo gitlab-ctl reconfigure"
 echo
 echo "6. Проверить доступ:"
 echo "   https://<IP-адрес-ВМ> или http://<IP-адрес-ВМ>"
+echo
+echo "7. Авторизоваться можно с логином root"
+echo "   Пароль находится в файле /etc/gitlab/initial_root_password"
+
