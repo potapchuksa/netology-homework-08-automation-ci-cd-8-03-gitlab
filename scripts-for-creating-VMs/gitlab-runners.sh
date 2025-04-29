@@ -54,7 +54,7 @@ echo "1. Завершить установку Ubuntu Server через конс
 echo
 echo "2. После установки выполнить следующие команды внутри ВМ для установки Docker"
 echo
-echo " - Установить репозиторий
+echo " - Установить репозиторий"
 echo "   sudo apt update"
 echo "   sudo apt install ca-certificates curl -y"
 echo "   sudo install -m 0755 -d /etc/apt/keyrings"
