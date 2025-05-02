@@ -1,0 +1,34 @@
+stages:
+  - test
+  - static-analysis
+  - build
+
+test:
+  stage: test
+  image: golang:1.16
+  script: 
+    - go test .
+  tags:
+    - docker
+
+static-analysis:
+  stage: static-analysis
+  image: openjdk:17-jdk-slim  # Используем slim-образ (Debian-based)
+  before_script:
+    - apt-get update && apt-get install -y wget unzip
+    - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+    - unzip sonar-scanner-cli-*.zip
+    - export PATH="$PATH:$(pwd)/sonar-scanner-5.0.1.3006-linux/bin"
+  script:
+    - sonar-scanner -Dsonar.projectKey=my-project -Dsonar.sources=. -Dsonar.host.url=http://192.168.122.182:9000 -Dsonar.login=sqp_8e36ccf3a4afd115acc9b03311668ffb903de111
+  tags:
+    - docker
+
+build:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build .
+  tags:
+    - docker
+    

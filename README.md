@@ -236,4 +236,64 @@
 
 ![](img/img-03-14.png)
 
+---
+
+# Дополнительно
+
+1. Установил SonarQube
+
+* [Скрипт ВМ](scripts-for-creating-VMs/sonarqube.sh)
+* установил ОС подключившись через virt-manager
+* Установил docker по инструкции
+* [yaml файл](sonarqube/docker-compose.yaml) docker-ccompose для SonarQube
+
+Пришлось повозиться, требует очень много ресурсов
+
+* принудительно установил vm.max_map_count на ВМ
+
+```
+sudo sysctl -w vm.max_map_count=262144
+echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+* Перезапустил Docker демон
+
+```
+sudo systemctl restart docker
+```
+
+* Полностью пересоздал контейнеры
+
+```
+docker compose down -v
+docker compose up -d
+```
+
+* Проверил, что параметр применился внутри контейнера
+
+```
+docker exec sonarqube-new-sonarqube-1 cat /proc/sys/vm/max_map_count
+```
+
+должно вернутся 262144
+
+Посмотреть логи можно
+
+```
+docker logs -f sonarqube-new-sonarqube-1
+```
+
+2. Залогинился в SonarQube, создал новый проект.
+
+3. Создал новый [pipeline](pipline-configurations/.gitlab-ci.yml.v4) и запушил его в GitLab
+
+* Пришлось изменить контейнер, т.к. образ sonarsource/sonar-scanner-cli собран для процессоров с поддержкой x86-64-v2, но сервер сервер работает на более старом CPU, который не поддерживает эту версию набора инструкций.
+
+4. Получил результат
+
+![](img/img-04-01.png)
+
+![](img/img-04-02.png)
+
 
